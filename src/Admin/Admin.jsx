@@ -4,8 +4,8 @@ import { FaUser } from "react-icons/fa";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { IoSearchSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineUser } from "react-icons/ai";
 import { HiUserAdd } from "react-icons/hi";
+import { FaUsers } from "react-icons/fa";
 
 const Admin = () => {
   const nav = useNavigate("");
@@ -22,9 +22,9 @@ const Admin = () => {
     nav("/show");
   };
 
-  const navigationToAddUser = () =>{
+  const navigationToAddUser = () => {
     nav("/show");
-  }
+  };
   return (
     <>
       <div className="flex flex-col lg:flex-row bg-gray-100 min-h-screen">
@@ -96,24 +96,28 @@ const Admin = () => {
           </nav>
 
           <h1 className="text-3xl font-bold mb-4 text-gray-800">Dashboard</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Card 1 */}
 
-            <div className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-between">
-              <div className="flex items-center">
-                <AiOutlineUser className="text-3xl text-gray-800 mr-2" />
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-800 mb-0">
-                    Total Users
-                  </h2>
-                  <p className="text-gray-600 text-lg font-semibold">100</p>
-                </div>
+            <div className=" bg-white p-4 rounded-lg shadow-lg flex items-center justify-between h-[8rem]">
+              <div className="items-left">
+              
+                  <FaUsers className=" text-5xl text-gray-900 bg-slate-400 rounded-full p-3" />
+                <h2 className="text-xl font-bold text-gray-800 mb-0">
+                  Total Users
+                </h2>
+              </div>
+              <div className="items-end">
+                <p className="text-gray-800 text-5xl font-bold ml-auto">100+</p>
               </div>
             </div>
 
             {/* Card 2 */}
 
-            <div className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-between" onClick={navigationToAddUser}>
+            <div
+              className="bg-white p-4 rounded-lg shadow-lg flex items-center justify-between"
+              onClick={navigationToAddUser}
+            >
               <div className="flex items-center">
                 <HiUserAdd className="text-3xl text-gray-800 mr-2" />
                 <div>

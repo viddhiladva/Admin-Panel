@@ -13,7 +13,7 @@ const Show = () => {
   const navigation = useNavigate();
 
   const navigateToHome = () => {
-    navigation("/admin");
+    navigation("/admin  ");
   };
 
   const navigateToAddUser = () =>{
