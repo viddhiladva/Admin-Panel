@@ -59,7 +59,7 @@ const Show = () => {
       pagination.push(
         <li
           key={i}
-          className={`mx-1 px-3 py-1 border rounded-lg bg-gray-200 ${
+          className={`mx-1 px-3 py-1 border rounded-lg bg-gray-300 ${
             currentPage === i ? "font-bold" : ""
           }`}
         >
@@ -104,21 +104,21 @@ const Show = () => {
         <table className="min-w-full divide-y divide-gray-200 shadow-xl my-6 border">
           <thead>
             <tr className=" text-left bg-gray-200 text-black">
-              <th className="py-3 px-6 text-center">Name</th>
-              <th className="py-3 px-6 text-center">Username</th>
-              <th className="py-3 px-6 text-center">Email</th>
-              <th className="py-3 px-6 text-center">Points</th>
-              <th className="py-3 px-6 text-center">Update</th>
-              <th className="py-3 px-6 text-center">Delete</th>
+              <th className="py-3 px-6 text-center text-[23px]">Name</th>
+              <th className="py-3 px-6 text-center text-[23px]">Username</th>
+              <th className="py-3 px-6 text-center text-[23px]">Email</th>
+              <th className="py-3 px-6 text-center text-[23px]">Points</th>
+              <th className="py-3 px-6 text-center text-[23px]">Update</th>
+              <th className="py-3 px-6 text-center text-[23px]">Delete</th>
             </tr>
           </thead>
           {currentItems.map((alldata) => (
             <tbody className="text-black" key={alldata.id}>
               <tr>
-                <td className="py-3 px-6 text-center">{alldata.name}</td>
-                <td className="py-3 px-6 text-center">{alldata.username}</td>
-                <td className="py-3 px-6 text-center">{alldata.email}</td>
-                <td className="py-3 px-6 text-center font-bold text-gray-700">
+                <td className="py-3 px-6 text-center text-[20px]">{alldata.name}</td>
+                <td className="py-3 px-6 text-center text-[20px]">{alldata.username}</td>
+                <td className="py-3 px-6 text-center text-[20px]">{alldata.email}</td>
+                <td className="py-3 px-6 text-center font-bold text-gray-700 text-[20px]">
                   {alldata.points}
                 </td>
                 <td className="py-3 px-2 text-center w-12">
@@ -134,13 +134,13 @@ const Show = () => {
                       );
                     }}
                   >
-                    <FaRegEdit className="text-green-600 text-lg" />
+                    <FaRegEdit className="text-green-600 text-[20px]" />
                   </Link>
                 </td>
                 <td className="py-3 px-2 text-center w-12">
                   <div className="flex justify-center items-center">
                     <MdDeleteForever
-                      className="text-red-600 text-lg"
+                      className="text-red-600 text-[23px]"
                       onClick={() => handleDelete(alldata.id)}
                     />
                   </div>
@@ -152,7 +152,7 @@ const Show = () => {
         {/* Pagination */}
         <ul className="flex justify-center">
           {currentPage > 1 && (
-            <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-200 font-semibold">
+            <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-300 font-semibold">
               <button
                 onClick={() => paginate(currentPage - 1)}
                 className="focus:outline-none"
@@ -163,7 +163,7 @@ const Show = () => {
           )}
           {renderPagination()}
           {currentPage < totalPages && (
-            <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-200 font-semibold">
+            <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-300 font-semibold">
               <button
                 onClick={() => paginate(currentPage + 1)}
                 className="focus:outline-none"

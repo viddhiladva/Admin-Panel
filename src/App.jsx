@@ -5,6 +5,7 @@ import Admin from "./Admin/Admin";
 import Show from './User/Show';
 import Update from './User/Update'
 import Adduser from "./User/Adduser";
+import AddCategory from "./addCategory/AddCategory";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/show" element={<Show/>}> </Route>
           <Route path="/update" element={<Update/>}></Route>
           <Route path="/addUser" element={<Adduser/>}></Route>
+          <Route path="/addCategory" element={<AddCategory/>}></Route>
 
         </Routes>
       </BrowserRouter>
