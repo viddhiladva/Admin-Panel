@@ -52,7 +52,7 @@ const Update = () => {
   return (
     <>
       <div className="flex justify-center items-center h-screen bg-gray-800">
-        <form className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2">
+        <form className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/3">
           <div className="text-center font-bold text-4xl">Update User</div>
           <div className="mb-4">
             <label
