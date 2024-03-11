@@ -35,7 +35,7 @@ const LoginForm = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <form
-        className="w-1/2 bg-white shadow-lg shadow-gray-500 rounded-lg px-10 py-8 mb-8 text-lg text-black"
+        className="w-2/3 bg-white shadow-lg shadow-gray-500 rounded-lg px-10 py-8 mb-8 text-lg text-black"
         onSubmit={handleSubmit}
       >
         <div className="text-4xl text-center font-bold mb-5">Admin</div>
