@@ -9,7 +9,7 @@ const AddCategory = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5);
+  const [itemsPerPage] = useState(9);
 
   // add data
   const handleSubmit = (e) => {
