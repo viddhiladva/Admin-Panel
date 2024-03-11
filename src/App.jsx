@@ -6,6 +6,7 @@ import Show from './User/Show';
 import Update from './User/Update'
 import Adduser from "./User/Adduser";
 import AddCategory from "./addCategory/AddCategory";
+import UpdateCategory from "./addCategory/UpdateCategory";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/update" element={<Update/>}></Route>
           <Route path="/addUser" element={<Adduser/>}></Route>
           <Route path="/addCategory" element={<AddCategory/>}></Route>
+          <Route path="/updateCategory" element={<UpdateCategory/>}></Route>
 
         </Routes>
       </BrowserRouter>

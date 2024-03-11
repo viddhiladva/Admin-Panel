@@ -98,8 +98,6 @@ const Show = () => {
   </div>
 </div>
 
-
-
       <div className=" overflow-auto w-full">
         <table className="min-w-full divide-y divide-gray-200 shadow-xl my-6 border">
           <thead>

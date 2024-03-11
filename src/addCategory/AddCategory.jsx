@@ -1,12 +1,17 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { MdFileDownloadDone } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+import { MdFileDownloadDone, MdDeleteForever } from "react-icons/md";
 
 const AddCategory = () => {
   const [category, setCategory] = useState("");
-  const [categoryPoint, setCategoryPoints] = useState( );
+  const [categoryPoint, setCategoryPoints] = useState();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
+  // add data
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -16,21 +21,74 @@ const AddCategory = () => {
       })
       .then(() => {
         setShowSuccess(true);
-        setTimeout(() => setShowSuccess(false), 2000);
+        setTimeout(() => setShowSuccess(false), 1000);
         setCategory("");
-        setCategoryPoints();
+        setCategoryPoints( );
+        fetchData();
       })
       .catch((error) => {
         console.error("Error adding item:", error);
       });
   };
 
+  // display data
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://65ed815f08706c584d99e8af.mockapi.io/category/category"
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // deleted data
+  const deleteData = (id) => {
+    axios
+      .delete(
+        `https://65ed815f08706c584d99e8af.mockapi.io/category/category/${id}`
+      )
+      .then(() => fetchData(id));
+  };
+
+  // logic for pagination
+  const totalItems = data.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const renderPagination = () => {
+    const pagination = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pagination.push(
+        <li
+          key={i}
+          className={`mx-1 px-3 py-1 border rounded-lg bg-gray-300 ${
+            currentPage === i ? "font-bold" : ""
+          }`}
+        >
+          <button onClick={() => paginate(i)} className="focus:outline-none">
+            {i}
+          </button>
+        </li>
+      );
+    }
+    return pagination;
+  };
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <div className="flex flex-col items-center h-screen bg-white">
       <h1 className="text-4xl font-bold m-4">Add Category</h1>
 
+      {/* add data */}
       <div className="bg-gray-100 p-3 rounded-lg w-1/3">
-        <form className="flex flex-col items-center  mb-1">
+        <form className="flex flex-col items-center mb-1">
           <input
             type="text"
             className="border border-gray-800 rounded-md px-4 py-2 mb-4 focus:outline-none w-full shadow-md text-lg"
@@ -54,12 +112,13 @@ const AddCategory = () => {
         </form>
       </div>
 
+      {/* pop-up */}
       {showSuccess && (
-        <div class="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <div class="bg-white text-black px-6 py-10 rounded-md flex flex-col items-center space-y-2 shadow-md">
-            <div class="flex flex-col items-center">
-              <MdFileDownloadDone class="text-bold text-6xl text-green-500" />
-              <div class="text-2xl font-semibold mt-5">
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white text-black px-6 py-10 rounded-md flex flex-col items-center space-y-2 shadow-md">
+            <div className="flex flex-col items-center">
+              <MdFileDownloadDone className="text-bold text-6xl text-green-500" />
+              <div className="text-2xl font-semibold mt-5">
                 Category added successfully...!
               </div>
             </div>
@@ -67,29 +126,78 @@ const AddCategory = () => {
         </div>
       )}
 
+      {/* show data */}
       <table className="border border-gray-300 w-1/2 mt-4">
         <thead>
           <tr className="bg-gray-200">
-            <th className="border border-gray-300 px-4 py-2 text-[23px] text-center bg-gray-200">
+            <th className="border border-gray-300 px-4 py-2 text-[20px] text-center bg-gray-200">
               Category
             </th>
-            <th className="border border-gray-300 px-4 py-2 text-[23px] text-center bg-gray-200 ">
+            <th className="border border-gray-300 px-4 py-2 text-[20px] text-center bg-gray-200 ">
               Points
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-[20px] text-center bg-gray-200 ">
+              Update
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-[20px] text-center bg-gray-200 ">
+              Delete
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="border border-gray-300 px-4 py-2 text-[20px] text-center">
-              Category 1
-            </td>
-            <td className="border border-gray-300 px-4 py-2 text-[20px] text-center">
-              10
-            </td>
-          </tr>
-          {/* Add more rows as needed */}
+          {currentItems.map((eachData, i) => (
+            <tr key={i}>
+              <td className="border border-gray-300 px-4 py-2 text-[18px] text-center">
+                {eachData.category}
+              </td>
+              <td className="border border-gray-300 px-4 py-2 text-[18px] text-center font-bold text-gray-700">
+                {eachData.categoryPoint}
+              </td>
+              <td className="border  border-gray-300 px-2 py-2 text-[18px] text-center w-12">
+                <div className="flex justify-center items-center">
+                  <FaRegEdit
+                    className="text-green-600 text-[20px]"
+                    onClick={() => updateData(eachData.id)}
+                  />
+                </div>
+              </td>
+              <td className="border  border-gray-300 px-2 py-2 text-[18px] text-center w-12">
+                <div className="flex justify-center items-center">
+                <MdDeleteForever
+                      className="text-red-600 text-[23px]"
+                      onClick={() => deleteData(eachData.id)}
+                    />
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
+
+      {/* pagination */}
+      <ul className="flex justify-center mt-3">
+        {currentPage > 1 && (
+          <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-300 font-semibold">
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              className="focus:outline-none"
+            >
+              Previous
+            </button>
+          </li>
+        )}
+        {renderPagination()}
+        {currentPage < totalPages && (
+          <li className="mx-1 px-3 py-1 border rounded-lg bg-gray-300 font-semibold">
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              className="focus:outline-none"
+            >
+              Next
+            </button>
+          </li>
+        )}
+      </ul>
     </div>
   );
 };
