@@ -13,7 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route exect path="/" element={<LoginForm/>}></Route>
+          <Route exact path="/" element={<LoginForm/>}></Route>
           <Route path="/admin" element={<Admin/>}></Route>
           <Route path="/show" element={<Show/>}> </Route>
           <Route path="/update" element={<Update/>}></Route>
