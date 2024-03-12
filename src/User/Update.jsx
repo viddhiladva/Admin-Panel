@@ -1,14 +1,15 @@
 import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MdOutlinePlaylistAdd } from "react-icons/md";
 
 const Update = () => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [points, setPoints] = useState("");
+  const [categoryPoint, setCategoryPoints] = useState("");
+  const [categoryData, setCategoryData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,42 +17,50 @@ const Update = () => {
     setName(localStorage.getItem("name"));
     setUserName(localStorage.getItem("username"));
     setEmail(localStorage.getItem("email"));
-    setPoints(localStorage.getItem("points"));
+    setCategoryPoints(localStorage.getItem("categoryData"));
   }, []);
 
   const navigateToShow = () => {
     navigate("/show");
   };
-  
+
+  const navigateToAddCategory = () =>{
+    navigate('/addCategory')
+  }
 
   const handleUpdate = (e) => {
     e.preventDefault();
   
-    // Parse the selected value to integer
-    const newPoints = parseInt(points);
-  
-    // Retrieve the previously selected points from localStorage
-    const prevPoints = parseInt(localStorage.getItem("points"));
-    
-    // Calculate the total points by adding previously selected points with new points
+    // Calculate total points here
+    const newPoints = Number(categoryPoint);
+    const prevPoints = parseInt(localStorage.getItem("categoryData"));
     const totalPoints = prevPoints + newPoints;
-    
+
     axios
     .put(`https://65e94d454bb72f0a9c511b56.mockapi.io/user/user/${id}`, {
       id,
       name,
       username,
       email,
-      points: totalPoints, // Use the total points here
+      categoryData: totalPoints, // Use the total points here
     })
     .then(() => {
       navigate("/show");
     });
   };
   
+  useEffect(() => {
+    axios
+      .get("https://65ed815f08706c584d99e8af.mockapi.io/category/category")
+      .then((resp) => {
+        setCategoryData(resp.data);
+      });
+  }, []);
+
+
   return (
     <>
-      <div className="flex justify-center items-center h-screen bg-gray-800">
+      <div className="flex justify-center items-center h-screen ">
         <form className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/3">
           <div className="text-center font-bold text-4xl">Update User</div>
           <div className="mb-4">
@@ -105,28 +114,32 @@ const Update = () => {
               required
             />
           </div>
-          <div className="mb-4">
-            <label
-              className="block text-black text-sm font-bold mb-2"
-              htmlFor="points"
-            >
-              Points
-            </label>
+          <label
+            className="block text-black text-sm font-bold mb-2"
+            htmlFor="points"
+          >
+            Points
+          </label>
+          <div className=" mb-4 w-full flex">
             <select
-              className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              id="points"
+              className="block appearance-none w-11/12 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               name="points"
-              value={points}
-              onChange={(e) => setPoints(e.target.value)}
+              value={categoryPoint}
+              onChange={(e) => setCategoryPoints(e.target.value)}
               required
             >
-              <option value="">Select</option>
-              <option value="300">Birthday</option>
-              <option value="500">Game Winner</option>
-              <option value="1000">Employee of the Month</option>
-              <option value="2000">Year Anniversary</option>
-              <option value="5000">Three Year Anniversary</option>
+              <option value="">slelect</option>
+              {categoryData.map((getData, index) => (
+                <option key={index} value={getData.categoryPoint}>
+                  {getData.category} - {getData.categoryPoint}
+                </option>
+              ))}
             </select>
+            <div className="w-1/12 ml-6">
+              <button className="bg-gray-800 hover:bg-gray-700 text-white font-bold px-3 py-2 rounded-lg  float-end">
+                <MdOutlinePlaylistAdd  className="text-[25px]" onClick={navigateToAddCategory}/>
+              </button>
+            </div>
           </div>
 
           <div className="flex justify-center">

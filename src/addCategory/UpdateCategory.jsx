@@ -1,19 +1,41 @@
-import React, { useState } from "react";
-import { MdFileDownloadDone } from "react-icons/md"; // Assuming you're using React Icons
+import { data } from "autoprefixer";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { MdFileDownloadDone } from "react-icons/md"; 
+import { useNavigate } from "react-router-dom";
 
 const UpdateCategory = () => {
+    const [id,setId] = useState(0);
   const [category, setCategory] = useState("");
   const [categoryPoint, setCategoryPoints] = useState("");
-  const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = () => {
-    // Handle form submission logic
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+    .put(`https://65ed815f08706c584d99e8af.mockapi.io/category/category/${id}`,{
+        category,
+        categoryPoint
+    })
+    .then(()=>{
+        navigate('/addCategory');
+    })  
   };
 
+
+
+  useEffect(() => {
+    setId(localStorage.getItem("id"));
+    setCategory(localStorage.getItem("category"));
+    setCategoryPoints(localStorage.getItem("categoryPoint"));
+  }, []);
+
+
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-800">
-      <div className="bg-gray-100 p-8 rounded-lg w-1/3">
-        <h1 className="text-2xl font-bold mb-4 text-gray-900 text-center">Update Category</h1>
+    <div className="flex justify-center items-center h-screen bg-white">
+      <div className="bg-gray-200 p-8 rounded-lg w-1/3 mt-2">
+        <h1 className="text-3xl font-bold mb-4 text-gray-900 text-center">Update Category</h1>
         <form className="flex flex-col items-center space-y-4">
           <input
             type="text"
@@ -33,22 +55,11 @@ const UpdateCategory = () => {
             className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-4 py-2 rounded-md focus:outline-none text-lg"
             onClick={handleSubmit}
           >
-            Update Category
+            Update
           </button>
         </form>
       </div>
-
-      {/* Pop-up */}
-      {showSuccess && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50">
-          <div className="bg-white text-black px-6 py-10 rounded-md flex flex-col items-center space-y-2 shadow-md">
-            <MdFileDownloadDone className="text-bold text-6xl text-green-500" />
-            <div className="text-2xl font-semibold mt-5">
-              Category added successfully...!
-            </div>
-          </div>
-        </div>
-      )}
+ 
     </div>
   );
 };

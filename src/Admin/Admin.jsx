@@ -74,7 +74,6 @@ const Admin = () => {
           <div className="mt-auto">
             <div
               className="flex items-center py-3 px-4 text-[23px]"
-              onClick={handelNavigation}
             >
               <RiLogoutCircleRLine className="mr-2 w-5 h-5 text-gray-400" />
               <button className="ml-2 text-gray-400 hover:text-white">

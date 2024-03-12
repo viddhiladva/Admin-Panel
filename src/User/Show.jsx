@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { HiUserAdd } from "react-icons/hi";
-import { useNavigate,Link } from "react-router-dom";
 import { GoHomeFill } from "react-icons/go";
+import { useNavigate,Link } from "react-router-dom";
 
 const Show = () => {
   const [data, setData] = useState([]);
@@ -24,13 +24,11 @@ const Show = () => {
     getData();
   }, []);
 
-  // data fatching
   function getData() {
     axios
       .get("https://65e94d454bb72f0a9c511b56.mockapi.io/user/user")
       .then((resp) => {
         setData(resp.data);
-        // console.log(resp.data);
       });
   }
   const handleDelete = (id) => {
@@ -39,14 +37,12 @@ const Show = () => {
       .then(() => getData());
   };
 
-  // locasotrage
-  const toLocalstorage = (id, name,username, email, points) => {
+  const toLocalstorage = (id, name,username, email, categoryData) => {
     localStorage.setItem("id", id);
     localStorage.setItem("name", name);
     localStorage.setItem("username", username);
     localStorage.setItem("email", email);
-    localStorage.setItem("points", points);
-    // console.log(points);
+    localStorage.setItem("categoryData", categoryData);
   };
 
   // Logic for pagination
@@ -74,7 +70,6 @@ const Show = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
-//   console.log(currentItems);
 
   return (
     <div className="container mx-auto">
@@ -117,7 +112,7 @@ const Show = () => {
                 <td className="py-3 px-6 text-center text-[20px]">{alldata.username}</td>
                 <td className="py-3 px-6 text-center text-[20px]">{alldata.email}</td>
                 <td className="py-3 px-6 text-center font-bold text-gray-700 text-[20px]">
-                  {alldata.points}
+                  {alldata.categoryData}
                 </td>
                 <td className="py-3 px-2 text-center w-12">
                   <Link to="/update"
@@ -128,10 +123,10 @@ const Show = () => {
                         alldata.name,
                         alldata.username,
                         alldata.email,
-                        alldata.points
+                        alldata.categoryData
                       );
                     }}
-                  >
+                    >
                     <FaRegEdit className="text-green-600 text-[20px]" />
                   </Link>
                 </td>
@@ -147,6 +142,7 @@ const Show = () => {
             </tbody>
           ))}
         </table>
+
         {/* Pagination */}
         <ul className="flex justify-center">
           {currentPage > 1 && (
