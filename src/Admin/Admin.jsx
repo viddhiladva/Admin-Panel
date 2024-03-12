@@ -8,8 +8,6 @@ import Sidebar from "./Sidebar";
 const Admin = () => {
   const [data, setData] = useState([]);
 
-  const nav = useNavigate("");
-
   function getData() {
     axios
       .get("https://65e94d454bb72f0a9c511b56.mockapi.io/user/user")

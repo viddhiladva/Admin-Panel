@@ -4,7 +4,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { HiUserAdd } from "react-icons/hi";
 import { GoHomeFill } from "react-icons/go";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import Sidebar from "../Admin/Sidebar";
 
 const Show = () => {
   const [data, setData] = useState([]);
@@ -16,9 +17,9 @@ const Show = () => {
     navigation("/admin  ");
   };
 
-  const navigateToAddUser = () =>{
+  const navigateToAddUser = () => {
     navigation("/adduser");
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -37,7 +38,7 @@ const Show = () => {
       .then(() => getData());
   };
 
-  const toLocalstorage = (id, name,username, email, categoryData) => {
+  const toLocalstorage = (id, name, username, email, categoryData) => {
     localStorage.setItem("id", id);
     localStorage.setItem("name", name);
     localStorage.setItem("username", username);
@@ -72,26 +73,28 @@ const Show = () => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <Sidebar/>
     <div className="container mx-auto">
- <div className="flex justify-between">
-  <div className="mt-3 font-semibold text-left text-4xl text-gray-900">
-    User Data...
-  </div>
-  <div className="flex flex-row-reverse">
-    <button
-      className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-0 px-4 mt-3 rounded-lg ml-2"
-      onClick={navigateToAddUser}
-    >
-      <HiUserAdd className="text-xl" />
-    </button>
-    <button
-      className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-0 px-4 mt-3 rounded-lg ml-2"
-      onClick={navigateToHome}
-    >
-      <GoHomeFill className="text-xl"/>
-    </button>
-  </div>
-</div>
+      <div className="flex justify-between">
+        <div className="mt-3 font-semibold text-left text-4xl text-gray-900">
+          User Data...
+        </div>
+        <div className="flex flex-row-reverse">
+          <button
+            className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-0 px-4 mt-3 rounded-lg ml-2"
+            onClick={navigateToAddUser}
+          >
+            <HiUserAdd className="text-xl" />
+          </button>
+          <button
+            className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-0 px-4 mt-3 rounded-lg ml-2"
+            onClick={navigateToHome}
+          >
+            <GoHomeFill className="text-xl" />
+          </button>
+        </div>
+      </div>
 
       <div className=" overflow-auto w-full">
         <table className="min-w-full divide-y divide-gray-200 shadow-xl my-6 border">
@@ -108,14 +111,21 @@ const Show = () => {
           {currentItems.map((alldata) => (
             <tbody className="text-black" key={alldata.id}>
               <tr>
-                <td className="py-3 px-6 text-center text-[20px]">{alldata.name}</td>
-                <td className="py-3 px-6 text-center text-[20px]">{alldata.username}</td>
-                <td className="py-3 px-6 text-center text-[20px]">{alldata.email}</td>
+                <td className="py-3 px-6 text-center text-[20px]">
+                  {alldata.name}
+                </td>
+                <td className="py-3 px-6 text-center text-[20px]">
+                  {alldata.username}
+                </td>
+                <td className="py-3 px-6 text-center text-[20px]">
+                  {alldata.email}
+                </td>
                 <td className="py-3 px-6 text-center font-bold text-gray-700 text-[20px]">
                   {alldata.categoryData}
                 </td>
                 <td className="py-3 px-2 text-center w-12">
-                  <Link to="/update"
+                  <Link
+                    to="/update"
                     className="flex justify-center items-center"
                     onClick={() => {
                       toLocalstorage(
@@ -126,7 +136,7 @@ const Show = () => {
                         alldata.categoryData
                       );
                     }}
-                    >
+                  >
                     <FaRegEdit className="text-green-600 text-[20px]" />
                   </Link>
                 </td>
@@ -169,6 +179,7 @@ const Show = () => {
         </ul>
       </div>
     </div>
+  </div>
   );
 };
 
