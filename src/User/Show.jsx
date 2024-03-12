@@ -75,7 +75,7 @@ const Show = () => {
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
       <Sidebar/>
-    <div className="container mx-auto">
+    <div className="container mx-3">
       <div className="flex justify-between">
         <div className="mt-3 font-semibold text-left text-4xl text-gray-900">
           User Data...
