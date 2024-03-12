@@ -87,12 +87,6 @@ const Show = () => {
           >
             <HiUserAdd className="text-xl" />
           </button>
-          <button
-            className="bg-gray-900 hover:bg-gray-700 text-white font-bold py-0 px-4 mt-3 rounded-lg ml-2"
-            onClick={navigateToHome}
-          >
-            <GoHomeFill className="text-xl" />
-          </button>
         </div>
       </div>
 

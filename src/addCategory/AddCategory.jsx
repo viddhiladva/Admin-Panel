@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdFileDownloadDone, MdDeleteForever } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import Sidebar from "../Admin/Sidebar";
 
 const AddCategory = () => {
   const [category, setCategory] = useState("");
@@ -92,8 +93,9 @@ const AddCategory = () => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className="flex flex-col items-center h-screen bg-white">
-
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <Sidebar/>
+    <div className="flex flex-col items-center h-screen bg-white  w-full">
       {/* add data */}
       <div className="bg-gray-200 p-3 px-5 rounded-lg w-1/3 mt-4">
         <form className="flex flex-col items-center mb-1">
@@ -215,6 +217,7 @@ const AddCategory = () => {
           </li>
         )}
       </ul>
+    </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdFileDownloadDone } from "react-icons/md"; 
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../Admin/Sidebar";
 
 const UpdateCategory = () => {
     const [id,setId] = useState(0);
@@ -23,8 +24,6 @@ const UpdateCategory = () => {
     })  
   };
 
-
-
   useEffect(() => {
     setId(localStorage.getItem("id"));
     setCategory(localStorage.getItem("category"));
@@ -33,7 +32,10 @@ const UpdateCategory = () => {
 
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
+    <>
+    <div className="flex flex-col lg:flex-row min-h-screen">
+      <Sidebar/>
+    <div className="flex justify-center items-center h-screen bg-white w-full">
       <div className="bg-gray-200 p-8 rounded-lg w-1/3 mt-2">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 text-center">Update Category</h1>
         <form className="flex flex-col items-center space-y-4">
@@ -61,6 +63,10 @@ const UpdateCategory = () => {
       </div>
  
     </div>
+    </div>
+  
+    </>
+   
   );
 };
 
