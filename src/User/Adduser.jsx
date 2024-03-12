@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 import { MdOutlinePlaylistAdd } from "react-icons/md";
+import Sidebar from "../Admin/Sidebar";
 
 const Adduser = () => {
   const [name, setName] = useState("");
@@ -67,7 +68,9 @@ const Adduser = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center h-screen  flex-col">
+      <div className="flex flex-col  lg:flex-row bg-gray-200 min-h-screen">
+        <Sidebar/>
+      <div className="flex justify-center items-center h-full w-full my-auto">
         <form className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/3">
           <div className="text-center font-bold text-4xl">Add User</div>
           <div className="mb-4">
@@ -167,6 +170,7 @@ const Adduser = () => {
             </button>
           </div>
         </form>
+      </div>
       </div>
     </>
   );
