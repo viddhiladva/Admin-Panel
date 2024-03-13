@@ -1,12 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import LoginForm from "./LoginForm/LoginForm";
-import Admin from "./Admin/Admin";
-import Show from './User/Show';
-import Update from './User/Update'
-import Adduser from "./User/Adduser";
-import AddCategory from "./addCategory/AddCategory";
-import UpdateCategory from "./addCategory/UpdateCategory";
+import LoginForm from "./Components/LoginForm/LoginForm";
+import Admin from "./Components/Admin/Admin";
+import Show from './Components/User/Show';
+import Update from "./Components/User/Update";
+import Adduser from "./Components/User/Adduser";
+import AddCategory from "./Components/Category/AddCategory";
+import UpdateCategory from "./Components/Category/UpdateCategory";
+import AddProduct from "./Components/ProductPanel/AddProduct";
+import Home from "./E-commerce/Home";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/addUser" element={<Adduser/>}></Route>
           <Route path="/addCategory" element={<AddCategory/>}></Route>
           <Route path="/updateCategory" element={<UpdateCategory/>}></Route>
+          <Route path="/addProduct" element={<AddProduct  />}></Route>
+          <Route path="/home" element={<Home/>}></Route>
 
         </Routes>
       </BrowserRouter>

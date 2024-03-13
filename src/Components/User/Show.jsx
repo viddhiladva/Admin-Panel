@@ -1,9 +1,8 @@
-import axios, { all } from "axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { HiUserAdd } from "react-icons/hi";
-import { GoHomeFill } from "react-icons/go";
 import { useNavigate, Link } from "react-router-dom";
 import Sidebar from "../Admin/Sidebar";
 
