@@ -1,16 +1,18 @@
-import React from 'react';
-import Navbar from './Navbar';
-import ProductCard from './ProductCard';
+import React from "react";
+import Navbar from "./Navbar";
+import ProductCard from "./ProductCard";
 
 const Home = () => {
-    return (
-        <>
-           <Navbar/> 
-           <div className='flex justify-evenly items-center mt-2'>
-           <ProductCard/>
-           </div>
-        </>
-    );
-}
+  return (
+    <>
+      <div className=" h-screen bg-gray-200">
+        <Navbar />
+      <div className="flex justify-evenly items-center mt-2">
+        <ProductCard />
+      </div>
+      </div>
+    </>
+  );
+};
 
 export default Home;
