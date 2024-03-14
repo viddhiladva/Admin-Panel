@@ -16,7 +16,7 @@ const Sidebar = () => {
     nav("/")
   }
   const handelProduct = () =>{
-    nav("/addProduct")
+    nav("/showProduct")
   }
   return (
     <>

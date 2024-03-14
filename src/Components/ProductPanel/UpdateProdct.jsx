@@ -1,55 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Sidebar from "../Admin/Sidebar";
-import { useDispatch } from "react-redux";
-import { addProduct, fetchProduct } from "./Slice/ProductSlice";
-import { useNavigate } from "react-router-dom";
 
-const AddProduct = () => {
-  const dispatch = useDispatch();
-  const [product, setProduct] = useState({
-    image: "",
-    title: "",
-    description: "",
-    points: "",
-    category: "",
-  });
-  const nav = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    const newValue = name === "points" ? Number(value) : value;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: newValue,
-    }));
-  };
-
-  const handelSubmit =  async (e) => {
-    e.preventDefault();
-    await dispatch(addProduct(product));
-    setProduct({
-      image: "",
-      title: "",
-      description: "",
-      points: "",
-      category: "",
-    });
-    dispatch(fetchProduct());
-    nav("/showProduct");
-  };
-
-  const navigateToShow = () =>{
-    nav("/showProduct");
-  }
-
+const UpdateProdct = () => {
   return (
-    <>
+    <div>
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
         <Sidebar />
         <div className="flex justify-center items-center h-full w-full my-auto">
           <form
             className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2"
-            onSubmit={handelSubmit}
+            // onSubmit={handelSubmit}
           >
             <div className="text-center font-bold text-4xl mb-2">
               Add Product
@@ -63,8 +23,8 @@ const AddProduct = () => {
                 type="text"
                 name="image"
                 placeholder="Product url..."
-                value={product.image}
-                onChange={handleChange}
+                // value={product.image}
+                // onChange={handleChange}
                 required
               />
             </div>
@@ -77,8 +37,8 @@ const AddProduct = () => {
                 type="text"
                 name="title"
                 placeholder="Title"
-                value={product.title}
-                onChange={handleChange}
+                // value={product.title}
+                // onChange={handleChange}
                 required
               />
             </div>
@@ -90,8 +50,8 @@ const AddProduct = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Description of Product"
                 name="description"
-                value={product.description}
-                onChange={handleChange}
+                // value={product.description}
+                // onChange={handleChange}
                 required
               ></textarea>
             </div>
@@ -104,8 +64,8 @@ const AddProduct = () => {
                 type="text"
                 name="points"
                 placeholder="Point"
-                value={product.points}
-                onChange={handleChange}
+                // value={product.points}
+                // onChange={handleChange}
                 required
               />
             </div>
@@ -118,8 +78,8 @@ const AddProduct = () => {
                 type="text"
                 name="category"
                 placeholder="Product Category"
-                value={product.category}
-                onChange={handleChange}
+                // value={product.category}
+                // onChange={handleChange}
                 required
               />
             </div>
@@ -128,21 +88,21 @@ const AddProduct = () => {
                 className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Submit
+                Update
               </button>
               <button
-             className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
-             type="submit"
-             onClick={navigateToShow}
-           >
-              Viwe Product
-           </button>
+                className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+                type="submit"
+                // onClick={navigateToShow}
+              >
+                Viwe Product
+              </button>
             </div>
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProdct;
