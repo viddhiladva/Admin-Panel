@@ -9,6 +9,9 @@ const Home = () => {
         <Navbar />
       <div className="flex justify-evenly items-center mt-5">
         <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
       </div>
       </div>
     </>
