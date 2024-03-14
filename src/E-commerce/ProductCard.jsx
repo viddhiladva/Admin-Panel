@@ -3,7 +3,7 @@ import React from "react";
 const ProductCard = () => {
   return (
     <div>
-      <div className="w-full max-w-sm border rounded-lg shadow bg-gray-100 ">
+      <div className="w-full max-w-sm border rounded-lg shadow-2xl bg-gray-100 ">
         <img
           className="px-5 pt-5 size-80 rounded-t-lg"
           src="https://imgs.search.brave.com/05qyvTyZlfUL-BoLuWDoz6npkpZIhtFkv4JDv2kYSb4/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcx/NTg1NzU2L3Bob3Rv/L3dhdGNoLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz0yQU9a/SEx0ZTU5d1RMS1NK/QnFRbnQzd0c3T3Zq/SzJGQktoTTRWRjdP/Z1hRPQ"
