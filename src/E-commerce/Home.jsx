@@ -7,7 +7,7 @@ const Home = () => {
     <>
       <div className=" h-screen bg-gray-300">
         <Navbar />
-      <div className="flex justify-evenly items-center mt-2">
+      <div className="flex justify-evenly items-center mt-5">
         <ProductCard />
       </div>
       </div>
