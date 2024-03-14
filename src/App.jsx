@@ -9,6 +9,7 @@ import AddCategory from "./Components/Category/AddCategory";
 import UpdateCategory from "./Components/Category/UpdateCategory";
 import AddProduct from "./Components/ProductPanel/AddProduct";
 import Home from "./E-commerce/Home";
+import ShowProduct from "./Components/ProductPanel/ShowProduct";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           <Route path="/addUser" element={<Adduser/>}></Route>
           <Route path="/addCategory" element={<AddCategory/>}></Route>
           <Route path="/updateCategory" element={<UpdateCategory/>}></Route>
-          <Route path="/addProduct" element={<AddProduct  />}></Route>
+          <Route path="/addProduct" element={<AddProduct/>}></Route>
+          <Route path="/showProduct" element={<ShowProduct/>}></Route>
           <Route path="/home" element={<Home/>}></Route>
 
         </Routes>

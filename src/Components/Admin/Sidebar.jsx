@@ -15,6 +15,9 @@ const Sidebar = () => {
   const logout = () =>{
     nav("/")
   }
+  const handelProduct = () =>{
+    nav("/addProduct")
+  }
   return (
     <>
       <div className="w-full lg:w-64 bg-gray-900 text-white flex flex-col justify-between">
@@ -42,7 +45,7 @@ const Sidebar = () => {
           </div>
           <div
             className="flex items-center py-3 px-4 text-[20px] transform transition duration-300 hover:scale-105"
-            onClick={handelUser}
+            onClick={handelProduct}
           >
             <FaBoxOpen className="mr-2 w-5 h-5 text-gray-400 hover:text-white" />
             <button className="ml-2 text-gray-400 hover:text-white">

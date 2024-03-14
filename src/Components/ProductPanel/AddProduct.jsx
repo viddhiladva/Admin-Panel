@@ -2,53 +2,57 @@ import React, { useState } from "react";
 import Sidebar from "../Admin/Sidebar";
 import { useDispatch } from "react-redux";
 import { addProduct } from "./Slice/ProductSlice";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const dispatch = useDispatch();
-  const [product,setProduct] = useState({
-    image : '',
-    title : '',
-    description : '',
-    points : '',
-    category : '',
+  const [product, setProduct] = useState({
+    image: "",
+    title: "",
+    description: "",
+    points: "",
+    category: "",
   });
+  const nav = useNavigate();
 
-  const handleChange = (e) =>{
-    const {name,value} = e.target;
-    setProduct((prevProduct) =>({
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const newValue = name === "points" ? Number(value) : value;
+    setProduct((prevProduct) => ({
       ...prevProduct,
-      [name] : value,
+      [name]: newValue,
     }));
   };
-  
-  const handelSubmit = (e) =>{
+
+  const handelSubmit = (e) => {
     e.preventDefault();
     dispatch(addProduct(product));
     setProduct({
-      image : '',
-      title : '',
-      description : '',
-      points : '',
-      category : '',
+      image: "",
+      title: "",
+      description: "",
+      points: "",
+      category: "",
     });
-    
-    console.log(product);
-  };
 
+    console.log(product);
+    nav("/showProduct");
+  };
 
   return (
     <>
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
         <Sidebar />
         <div className="flex justify-center items-center h-full w-full my-auto">
-          <form className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2" onSubmit={handelSubmit}>
+          <form
+            className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2"
+            onSubmit={handelSubmit}
+          >
             <div className="text-center font-bold text-4xl mb-2">
               Add Product
             </div>
             <div className="mb-4">
-              <label
-                className="block text-black  text-sm font-bold mb-2"
-              >
+              <label className="block text-black  text-sm font-bold mb-2">
                 Product Image
               </label>
               <input
@@ -62,9 +66,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                className="block text-black text-sm font-bold mb-2"
-              >
+              <label className="block text-black text-sm font-bold mb-2">
                 Product Title
               </label>
               <input
@@ -83,17 +85,15 @@ const AddProduct = () => {
               </label>
               <textarea
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  placeholder="Description of Product"
-                  name="description"
+                placeholder="Description of Product"
+                name="description"
                 value={product.description}
                 onChange={handleChange}
                 required
               ></textarea>
-            </div>  
+            </div>
             <div className="mb-6">
-              <label
-                className="block text-black text-sm font-bold mb-2"
-              >
+              <label className="block text-black text-sm font-bold mb-2">
                 Point
               </label>
               <input
@@ -107,9 +107,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="mb-6">
-              <label
-                className="block text-black text-sm font-bold mb-2"
-              >
+              <label className="block text-black text-sm font-bold mb-2">
                 Category
               </label>
               <input
@@ -130,12 +128,12 @@ const AddProduct = () => {
                 Submit
               </button>
               {/* <button
-                className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
-                type="submit"
-                // onClick={navigateToShow}
-              >
-                View Users
-              </button> */}
+             className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+             type="submit"
+             // onClick={navigateToShow}
+           >
+             View Users
+           </button> */}
             </div>
           </form>
         </div>
