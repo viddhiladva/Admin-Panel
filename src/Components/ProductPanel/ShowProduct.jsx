@@ -20,12 +20,6 @@ const ShowProduct = () => {
         <Sidebar />
         <div className="w-full px-4 py-2 relative">
           <div className="flex justify-end">
-            {/* Search Bar */}
-            {/* <input
-        type="text"
-        placeholder="Search..."
-        className="bg-white focus:outline-none border border-gray-300 rounded py-2 px-4 w-3/4 mr-2"
-      /> */}
             {/* Add Product Button */}
             <button className="bg-gray-800 text-white py-2 px-4 rounded flex justify-end">
               <BsFillCartPlusFill className="text-2xl" />
@@ -37,7 +31,7 @@ const ShowProduct = () => {
               {products.map((product) => (
                 <div
                   key={product.id}
-                  className="bg-white rounded-lg shadow-md p-5"
+                  className="bg-white rounded-lg shadow-md p-5 relative"
                 >
                   <img
                     src={product.image}
@@ -52,8 +46,8 @@ const ShowProduct = () => {
                   <p className="text-gray-700 mb-2">
                     Category : {product.category}
                   </p>
-                  <div className="flex justify-end">
-                    <button className="bg-green-600 text-white py-2 px-2 rounded mr-2">
+                  <div className="flex justify-end absolute bottom-0 right-0 m-3">
+                    <button className=" bg-green-600 text-white py-2 px-2 rounded mr-2">
                       <AiOutlineEdit className="text-2xl" />
                     </button>
                     <button className="bg-red-500 text-white py-2 px-2 rounded">
