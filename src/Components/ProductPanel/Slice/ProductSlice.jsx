@@ -11,7 +11,7 @@ export const fetchProduct = createAsyncThunk("product/fetchProducts",async () =>
 export const fetchProductById = createAsyncThunk("product/fetchProductsById",async (id) =>{
     const response = await axios.get(`https://65f150dbda8c6584131d60d9.mockapi.io/product/${id}`);
     const data = await response.data;
-    console.log(data,"slice");
+    // console.log(data,"slice");
     return data;
 });
 

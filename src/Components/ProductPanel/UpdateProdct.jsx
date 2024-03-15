@@ -8,12 +8,13 @@ const UpdateProdct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  const [Product,setUpdatePorduct ] = useState(product);
+  const [Product,setUpdateProduct ] = useState('');
   const nav= useNavigate();
 
   console.log(product, "productID");
   useEffect(() => {
     dispatch(fetchProductById(id));
+    setUpdateProduct(product)
   }, [dispatch]);
 
   const handelSubmit =(e) =>{
@@ -23,7 +24,7 @@ const UpdateProdct = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUpdatePorduct((prevProduct) => ({
+    setUpdateProduct((prevProduct) => ({
       ...prevProduct,
       [name]: value,
     }));
@@ -33,7 +34,7 @@ const UpdateProdct = () => {
     nav('/ShowProduct')
   }
 
-  console.log(product);
+  console.log("products",product);
   return (
     <div>
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
@@ -55,7 +56,7 @@ const UpdateProdct = () => {
                 type="text"
                 name="image"
                 placeholder="Product url..."
-                value={product.image || ""}
+                // value={Product.image || ""}
                 onChange={handleChange}
                 required
               />
@@ -69,7 +70,7 @@ const UpdateProdct = () => {
                 type="text"
                 name="title"
                 placeholder="Title"
-                value={product.title || ""}
+                // value={Product.title}
                 onChange={handleChange}
                 required
               />
@@ -82,7 +83,7 @@ const UpdateProdct = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Description of Product"
                 name="description"
-                value={product.description || ""}
+                // value={Product.description || ""}
                 onChange={handleChange}
                 required
               ></textarea>
@@ -96,7 +97,7 @@ const UpdateProdct = () => {
                 type="text"
                 name="points"
                 placeholder="Point"
-                value={product.points || ""}
+                // value={Product.points || ""}
                 onChange={handleChange}
                 required
               />
@@ -110,7 +111,7 @@ const UpdateProdct = () => {
                 type="text"
                 name="category"
                 placeholder="Product Category"
-                value={product.category || ""}
+                // value={Product.category || ""}
                 onChange={handleChange}
                 required
               />
