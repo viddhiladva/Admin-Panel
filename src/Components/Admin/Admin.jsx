@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUsers, } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux"; 
+import { FaUsers } from "react-icons/fa";
+import { FaBoxOpen } from "react-icons/fa6";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { fetchProduct } from "../ProductPanel/Slice/ProductSlice";
 
 const Admin = () => {
   const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.product); 
 
   function getData() {
     axios
@@ -15,6 +19,10 @@ const Admin = () => {
         setData(resp.data);
       });
   }
+  useEffect(()=>{
+    dispatch(fetchProduct())
+  },[dispatch]);
+
   useEffect(() => {
     getData();
   }, []);
@@ -42,6 +50,20 @@ const Admin = () => {
               <div className="items-end">
                 <p className="text-gray-800 text-5xl font-bold ml-auto">
                   {data.length}
+                </p>
+              </div>
+            </div>
+            {/* Card 2 */}
+            <div className=" bg-white p-4 rounded-lg shadow-lg flex items-center justify-between h-[8rem] transform transition duration-300  hover:scale-105">
+              <div className="items-left">
+                <FaBoxOpen className=" text-5xl text-gray-900 bg-slate-400 rounded-full p-3" />
+                <h2 className="text-xl font-bold text-gray-800 mb-0">
+                  Total Product
+                </h2>
+              </div>
+              <div className="items-end">
+                <p className="text-gray-800 text-5xl font-bold ml-auto">
+                  {product.length}
                 </p>
               </div>
             </div>

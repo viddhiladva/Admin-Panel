@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const ShowProduct = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const products = useSelector((state) => state.product.product);
+  const product = useSelector((state) => state.product.product);
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -25,6 +25,10 @@ const ShowProduct = () => {
       dispatch(deleteProduct(id));
     }
   };
+
+  const handeUpdate = (id) =>{
+    nav(`/updateProduct/${id}`)
+  }
 
   return (
     <>
@@ -43,29 +47,27 @@ const ShowProduct = () => {
           {/* card */}
           <div className="flex justify-center items-center w-full my-auto relative mt-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
-              {products.map((product) => (
-                <div key={product.id} className="bg-white rounded-lg shadow-md p-5">
+              {product.map((pro) => (
+                <div key={pro.id} className="bg-white rounded-lg shadow-md p-5">
                   <img
-                    src={product.image}
-                    alt={product.title}
+                    src={pro.image}
+                    alt={pro.title}
                     className="w-full h-44 object-cover mb-2 rounded"
                   />
-                  <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
-                  <p className="text-gray-700 mb-2 text-xl font-semibold">{product.points}</p>
-                  <p className="text-gray-700 mb-2">{product.description}</p>
-                  <p className="text-gray-700 mb-2">Category : {product.category}</p>
+                  <h2 className="text-2xl font-bold mb-2">{pro.title}</h2>
+                  <p className="text-gray-700 mb-2 text-xl font-semibold">{pro.points}</p>
+                  <p className="text-gray-700 mb-2">{pro.description}</p>
+                  <p className="text-gray-700 mb-2">Category : {pro.category}</p>
                   <div className="flex justify-end ">
                     <button
                       className="bg-green-600 text-white py-2 px-2 rounded mr-2"
-                      onClick={() => {
-                        // Handle edit functionality here
-                      }}
+                      onClick={() => handeUpdate(pro.id)}
                     >
                       <AiOutlineEdit className="text-2xl" />
                     </button>
                     <button
                       className="bg-red-500 text-white py-2 px-2 rounded"
-                      onClick={() => handleDelete(product.id)}
+                      onClick={() => handleDelete(pro.id)}
                     >
                       <AiOutlineDelete className="text-2xl" />
                     </button>

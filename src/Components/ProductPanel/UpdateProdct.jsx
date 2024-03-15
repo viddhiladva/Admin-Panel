@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Sidebar from "../Admin/Sidebar";
+import { fetchProductById,updateProduct } from "./Slice/ProductSlice";
+import { useNavigate, useParams } from "react-router-dom";
 
 const UpdateProdct = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.product);
+  const [Product,setUpdatePorduct ] = useState(product);
+  const nav= useNavigate();
+
+  console.log(product, "productID");
+  useEffect(() => {
+    dispatch(fetchProductById(id));
+  }, [dispatch]);
+
+  const handelSubmit =(e) =>{
+    e.prevenDefualt();
+    dispatch(updateProduct(Product));
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatePorduct((prevProduct) => ({
+      ...prevProduct,
+      [name]: value,
+    }));
+  };
+
+  const navigateToShow = () =>{
+    nav('/ShowProduct')
+  }
+
+  console.log(product);
   return (
     <div>
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
@@ -9,7 +41,7 @@ const UpdateProdct = () => {
         <div className="flex justify-center items-center h-full w-full my-auto">
           <form
             className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2"
-            // onSubmit={handelSubmit}
+            onSubmit={handelSubmit}
           >
             <div className="text-center font-bold text-4xl mb-2">
               Add Product
@@ -23,8 +55,8 @@ const UpdateProdct = () => {
                 type="text"
                 name="image"
                 placeholder="Product url..."
-                // value={product.image}
-                // onChange={handleChange}
+                value={product.image || ""}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -37,8 +69,8 @@ const UpdateProdct = () => {
                 type="text"
                 name="title"
                 placeholder="Title"
-                // value={product.title}
-                // onChange={handleChange}
+                value={product.title || ""}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -50,8 +82,8 @@ const UpdateProdct = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Description of Product"
                 name="description"
-                // value={product.description}
-                // onChange={handleChange}
+                value={product.description || ""}
+                onChange={handleChange}
                 required
               ></textarea>
             </div>
@@ -64,8 +96,8 @@ const UpdateProdct = () => {
                 type="text"
                 name="points"
                 placeholder="Point"
-                // value={product.points}
-                // onChange={handleChange}
+                value={product.points || ""}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -78,24 +110,24 @@ const UpdateProdct = () => {
                 type="text"
                 name="category"
                 placeholder="Product Category"
-                // value={product.category}
-                // onChange={handleChange}
+                value={product.category || ""}
+                onChange={handleChange}
                 required
               />
             </div>
             <div className="flex justify-center">
               <button
                 className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
+                type="submit" onClick={navigateToShow}
               >
                 Update
               </button>
               <button
                 className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
                 type="submit"
-                // onClick={navigateToShow}
+                onClick={navigateToShow}
               >
-                Viwe Product
+                View Product
               </button>
             </div>
           </form>
