@@ -55,9 +55,11 @@ const ProductSlice = createSlice({
             state.status = 'idle';
             state.product = action.payload;
         })
-        .addCase(updateProduct.fulfilled, (state,action) =>{
+        .addCase(updateProduct.fulfilled, (state, action) => {
+            const updatedProduct = action.payload;
+            const index = state.product.findIndex(product => product.id === updatedProduct.id);
             if (index !== -1) {
-                state.product[index] = action.payload;
+                state.product[index] = updatedProduct; 
             }
         })
         .addCase(deleteProduct.fulfilled, (state,action)=>{

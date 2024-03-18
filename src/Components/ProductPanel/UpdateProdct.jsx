@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Sidebar from "../Admin/Sidebar";
-import { fetchProductById,updateProduct } from "./Slice/ProductSlice";
+import { fetchProductById, updateProduct } from "./Slice/ProductSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
-const UpdateProdct = () => {
+const UpdateProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.product);
-  const [Product,setUpdateProduct ] = useState('');
-  const nav= useNavigate();
+  const [Product, setUpdateProduct] = useState({
+    image: "",
+    title: "",
+    description: "",
+    points: "",
+    category: "",
+  });
+  const nav = useNavigate();
 
-  console.log(product, "productID");
   useEffect(() => {
     dispatch(fetchProductById(id));
-    setUpdateProduct(product)
-  }, [dispatch]);
+  }, [dispatch, id]);
 
-  const handelSubmit =(e) =>{
-    e.prevenDefault();
+  useEffect(() => {
+    setUpdateProduct(product);
+  }, [product]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(updateProduct(Product));
-  }
+    console.log("submitted successfully");
+    navigateToShow();
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,22 +39,21 @@ const UpdateProdct = () => {
     }));
   };
 
-  const navigateToShow = () =>{
-    nav('/ShowProduct')
-  }
+  const navigateToShow = () => {
+    nav("/ShowProduct");
+  };
 
-  console.log("products",product);
   return (
     <div>
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
-        <Sidebar />
+        {/* Your Sidebar component */}
         <div className="flex justify-center items-center h-full w-full my-auto">
           <form
             className="bg-white shadow-lg shadow-gray-500 rounded px-8 pt-6 pb-8 mb-4 w-1/2"
-            onSubmit={handelSubmit}
+            onSubmit={handleSubmit}
           >
             <div className="text-center font-bold text-4xl mb-2">
-              Add Product
+              Update Product
             </div>
             <div className="mb-4">
               <label className="block text-black  text-sm font-bold mb-2">
@@ -56,21 +64,22 @@ const UpdateProdct = () => {
                 type="text"
                 name="image"
                 placeholder="Product url..."
-                // value={Product.image || ""}
+                value={Product.image}
                 onChange={handleChange}
                 required
               />
             </div>
+            {/* Other input fields for title, description, points, category */}
             <div className="mb-4">
-              <label className="block text-black text-sm font-bold mb-2">
-                Product Title
-              </label>
-              <input
+                             <label className="block text-black text-sm font-bold mb-2">
+                 Product Title
+               </label>
+               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 name="title"
                 placeholder="Title"
-                // value={Product.title}
+                value={Product.title}
                 onChange={handleChange}
                 required
               />
@@ -83,7 +92,7 @@ const UpdateProdct = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Description of Product"
                 name="description"
-                // value={Product.description || ""}
+                value={Product.description}
                 onChange={handleChange}
                 required
               ></textarea>
@@ -97,7 +106,7 @@ const UpdateProdct = () => {
                 type="text"
                 name="points"
                 placeholder="Point"
-                // value={Product.points || ""}
+                value={Product.points}
                 onChange={handleChange}
                 required
               />
@@ -111,24 +120,26 @@ const UpdateProdct = () => {
                 type="text"
                 name="category"
                 placeholder="Product Category"
-                // value={Product.category || ""}
+                value={Product.category}
                 onChange={handleChange}
                 required
               />
             </div>
+            
+            {/*  */}
             <div className="flex justify-center">
               <button
                 className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit" onClick={navigateToShow}
+                type="submit"
               >
                 Update
               </button>
               <button
                 className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
-                type="submit"
+                type="button"
                 onClick={navigateToShow}
               >
-                View Product
+                Cancel
               </button>
             </div>
           </form>
@@ -138,4 +149,4 @@ const UpdateProdct = () => {
   );
 };
 
-export default UpdateProdct;
+export default UpdateProduct;

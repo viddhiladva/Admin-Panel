@@ -10,11 +10,11 @@ const ShowProduct = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const product = useSelector((state) => state.product.product);
-  // console.log("..........product",product);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const cardRef = useRef(null);
+  
 
   useEffect(() => {
     dispatch(fetchProduct());
@@ -64,10 +64,10 @@ const ShowProduct = () => {
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
         <Sidebar />
         <div className="w-full px-4 py-2 relative">
-          {/* pagination */}
+          {/* pagination and add prodcut functionality */}
           <div className="flex justify-between items-center mb-4">
             <button
-              className="bg-gray-800 text-white py-4 px-4 rounded flex justify-end"
+              className="bg-gray-800 text-white py-2 px-4 rounded flex justify-end"
               onClick={navigateToAddProduct}
             >
               Add Product
@@ -155,7 +155,10 @@ const ShowProduct = () => {
                       </ul>
                     </div>
                   )}
+                  {/* dropdown end */} 
                 </div>
+
+                {/* card insider */}
                 <div className="flex flex-col items-center pb-7">
                   <div className="py-3 px-3 w-full overflow-hidden">
                     <img
@@ -177,6 +180,7 @@ const ShowProduct = () => {
                     Category: {pro.category}
                   </p>
                 </div>
+                {/* card insider end  */}
               </div>
             ))}
           </div>
