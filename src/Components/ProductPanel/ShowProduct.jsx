@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import  { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, fetchProduct } from "./Slice/ProductSlice";
 import Sidebar from "../Admin/Sidebar";
@@ -14,11 +14,10 @@ const ShowProduct = () => {
   const productsPerPage = 10;
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const cardRef = useRef(null);
-  
 
   useEffect(() => {
     dispatch(fetchProduct());
-  }, [dispatch]);
+  },[dispatch]);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -39,8 +38,9 @@ const ShowProduct = () => {
   };
 
   const handleUpdate = (id) => {
-    nav(`/updateProduct/${id}`);
-  };
+  nav(`/updateProduct/${id}`);
+  dispatch(fetchProduct());
+};
 
   const toggleDropdown = (id) => {
     setDropdownOpen((prevId) => (prevId === id ? null : id));
