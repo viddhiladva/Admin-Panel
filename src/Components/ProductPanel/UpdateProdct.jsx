@@ -18,7 +18,7 @@ const UpdateProdct = () => {
   }, [dispatch]);
 
   const handelSubmit =(e) =>{
-    e.prevenDefualt();
+    e.prevenDefault();
     dispatch(updateProduct(Product));
   }
 
