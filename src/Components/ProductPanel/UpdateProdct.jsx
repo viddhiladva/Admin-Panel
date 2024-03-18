@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import{ useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductById, updateProduct } from "./Slice/ProductSlice";
 import { useNavigate, useParams } from "react-router-dom";
@@ -69,7 +69,6 @@ const UpdateProduct = () => {
                 required
               />
             </div>
-            {/* Other input fields for title, description, points, category */}
             <div className="mb-4">
                              <label className="block text-black text-sm font-bold mb-2">
                  Product Title
