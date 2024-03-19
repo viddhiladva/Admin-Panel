@@ -11,7 +11,6 @@ export const fetchProduct = createAsyncThunk("product/fetchProducts",async () =>
 export const fetchProductById = createAsyncThunk("product/fetchProductsById",async (id) =>{
     const response = await axios.get(`https://65f150dbda8c6584131d60d9.mockapi.io/product/${id}`);
     const data = await response.data;
-    // console.log(data,"slice");
     return data;
 });
 
@@ -65,8 +64,14 @@ export const ProductSlice = createSlice({
 
         .addCase(updateProduct.fulfilled,(state,action) =>{
             const updateProduct = action.payload;
-            state.product = state.product.map((prod) =>{
-                prod.id === updateProduct.id ? updateProduct : prod;
+            state.product = state.product.length && state.product.map((prod) => {
+                if (prod.id === updateProduct.id) {
+                    prod.category = updateProduct.category;
+                    prod.points = updateProduct.points;
+                    prod.description = updateProduct.description;
+                    prod.title = updateProduct.title;
+                }
+                return prod;
             })
         })
         .addCase(deleteProduct.fulfilled, (state,action)=>{

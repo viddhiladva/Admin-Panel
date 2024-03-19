@@ -21,7 +21,7 @@ const ShowProduct = () => {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = product.slice(indexOfFirstProduct,indexOfLastProduct);
+  const currentProducts = product.length ? product.slice(indexOfFirstProduct,indexOfLastProduct) : [product];   
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage((nextPage) => nextPage + 1);
@@ -64,7 +64,6 @@ const ShowProduct = () => {
       <div className="flex flex-col lg:flex-row bg-gray-200 min-h-screen">
         <Sidebar />
         <div className="w-full px-4 py-2 relative">
-          {/* pagination and add prodcut functionality */}
           <div className="flex justify-between items-center mb-4">
             <button
               className="bg-gray-800 text-white py-2 px-4 rounded flex justify-end"
@@ -103,15 +102,13 @@ const ShowProduct = () => {
               </button>
             </div>
           </div>
-
-          {/* card */}
           <div
             ref={cardRef}
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
           >
-            {currentProducts.map((pro) => (
+            {currentProducts.map((pro,i) => (
               <div
-                key={pro.id}
+                key={i}
                 className="relative w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md transform transition duration-300  hover:scale-105"
               >
                 <div className="flex justify-end px-4 pt-3">
@@ -131,8 +128,6 @@ const ShowProduct = () => {
                       <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                     </svg>
                   </button>
-
-                  {/* Dropdown menu */}
                   {dropdownOpen === pro.id && (
                     <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-lg shadow">
                       <ul className="py-1">
@@ -155,10 +150,7 @@ const ShowProduct = () => {
                       </ul>
                     </div>
                   )}
-                  {/* dropdown end */} 
                 </div>
-
-                {/* card insider */}
                 <div className="flex flex-col items-center pb-7">
                   <div className="py-3 px-3 w-full overflow-hidden">
                     <img
@@ -180,7 +172,6 @@ const ShowProduct = () => {
                     Category: {pro.category}
                   </p>
                 </div>
-                {/* card insider end  */}
               </div>
             ))}
           </div>
